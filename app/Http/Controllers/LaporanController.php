@@ -71,7 +71,7 @@ class LaporanController extends Controller
      */
     public function update(UpdateLaporanRequest $request, Laporan $laporan)
     {
-    
+
         $validatedData = $request->validated();
 
         $laporan->update($validatedData);
@@ -84,6 +84,9 @@ class LaporanController extends Controller
      */
     public function destroy(Laporan $laporan)
     {
-        //
+        $laporan->delete();
+
+        return redirect()->route('laporan.index')->with('success', 'Laporan berhasil dihapus');
     }
+
 }

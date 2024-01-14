@@ -14,6 +14,11 @@
                     <div class="btn-group" role="group">
                         <a href="{{ route('laporan.show', $laporan) }}" class="btn btn-primary">Lihat Detail</a>
                         <a href="{{ route('laporan.edit', $laporan) }}" class="btn btn-warning">Edit</a>
+                        <form action="{{ route('laporan.destroy', $laporan) }}" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus laporan ini?')">Delete</button>
+                        </form>
                     </div>
                 </li>
                 @empty
