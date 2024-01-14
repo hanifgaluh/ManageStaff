@@ -14,8 +14,16 @@ class LaporanController extends Controller
      */
     public function index()
     {
-        return view('laporan.index');
+        $user = auth()->user();
+        $laporans = Laporan::with('user')->where('user_id', $user->id)->get();
+
+        if ($laporans !== null) {
+            return view('laporan.index', ['laporans' => $laporans]);
+        } else {
+            return view('laporan.index', ['laporans' => []]);
+        }
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -30,7 +38,10 @@ class LaporanController extends Controller
      */
     public function store(StoreLaporanRequest $request)
     {
+
+        $user = auth()->user();
         $validatedData = $request->validated();
+        $validatedData['user_id'] = $user->id;
 
         Laporan::create($validatedData);
 
@@ -40,9 +51,11 @@ class LaporanController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Laporan $laporan)
+    public function show($id)
     {
-        //
+        $laporan = Laporan::find($id);
+
+        return view('laporan.show', ['laporan' => $laporan]);
     }
 
     /**

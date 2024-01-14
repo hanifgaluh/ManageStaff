@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('judul');
             $table->string('isi');
-            $table->string('pengirim');
+            $table->foreignId('user_id');
             $table->timestamps();
         });
     }

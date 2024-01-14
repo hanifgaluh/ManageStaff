@@ -13,10 +13,6 @@
             <label for="isi">Isi Laporan:</label>
             <textarea name="isi" id="isi" class="form-control" required></textarea>
         </div>
-        <div class="form-group">
-            <label for="pengirim">Pengirim</label>
-            <input type="text" name="pengirim" id="pengirim" class="form-control" required>
-        </div>
         <button type="submit" class="btn btn-primary">Simpan</button>
     </form>
 </div>

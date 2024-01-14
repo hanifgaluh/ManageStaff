@@ -24,7 +24,7 @@ class StoreLaporanRequest extends FormRequest
         return [
             'judul'=>'required|string',
             'isi'=>'required|string',
-            'pengirim'=> 'required|string'
+            
         ];
     }
 }
