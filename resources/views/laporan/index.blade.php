@@ -11,12 +11,14 @@
                     <h4>{{ $laporan->judul }}</h4>
                     <p>{{ $laporan->isi }}</p>
                     <p class="text-muted">Pengirim: {{ $laporan->user->name }}</p>
-                    <a href="{{ route('laporan.show', $laporan) }}" class="btn btn-primary">Lihat Detail</a>
+                    <div class="btn-group" role="group">
+                        <a href="{{ route('laporan.show', $laporan) }}" class="btn btn-primary">Lihat Detail</a>
+                        <a href="{{ route('laporan.edit', $laporan) }}" class="btn btn-warning">Edit</a>
+                    </div>
                 </li>
                 @empty
                 <li class="list-group-item">Belum ada laporan.</li>
                 @endforelse
-
             </ul>
         </div>
         <div class="col-md-4 text-right">

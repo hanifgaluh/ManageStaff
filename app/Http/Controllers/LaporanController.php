@@ -63,7 +63,7 @@ class LaporanController extends Controller
      */
     public function edit(Laporan $laporan)
     {
-        //
+        return view('laporan.edit', ['laporan' => $laporan]);
     }
 
     /**
@@ -71,7 +71,12 @@ class LaporanController extends Controller
      */
     public function update(UpdateLaporanRequest $request, Laporan $laporan)
     {
-        //
+    
+        $validatedData = $request->validated();
+
+        $laporan->update($validatedData);
+
+        return redirect()->route('laporan.index')->with('success', 'Laporan berhasil diperbarui');
     }
 
     /**

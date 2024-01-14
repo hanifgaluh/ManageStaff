@@ -11,7 +11,7 @@ class UpdateLaporanRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return $this->user()->id === $this->laporan->user_id;
     }
 
     /**
@@ -22,7 +22,8 @@ class UpdateLaporanRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'judul' => 'required|string',
+            'isi' => 'required|string',
         ];
     }
 }
