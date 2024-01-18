@@ -6,6 +6,8 @@ use App\Models\Laporan;
 use App\Http\Requests\StoreLaporanRequest;
 use App\Http\Requests\UpdateLaporanRequest;
 use Illuminate\Contracts\Support\ValidatedData;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class LaporanController extends Controller
 {
@@ -55,6 +57,10 @@ class LaporanController extends Controller
     {
         $laporan = Laporan::find($id);
 
+        // if (!$laporan || !$laporan->exists()) {
+        //     abort(404, 'Laporan tidak ditemukan.');
+        // }
+
         return view('laporan.show', ['laporan' => $laporan]);
     }
 
@@ -89,4 +95,15 @@ class LaporanController extends Controller
         return redirect()->route('laporan.index')->with('success', 'Laporan berhasil dihapus');
     }
 
+
+    public function leader()
+    {
+        $user = Auth::user();
+
+        $laporans = Laporan::join('users', 'laporans.user_id', '=', 'users.id')
+            ->where('users.leader', 'LIKE', '%' . $user->name . '%')
+            ->get(['laporans.*', 'users.leader', 'users.name']);
+
+        return view('laporan.inbox', ['laporans' => $laporans]);
+    }
 }

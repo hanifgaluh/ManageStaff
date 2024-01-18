@@ -19,8 +19,11 @@ use App\Http\Controllers\LaporanController;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/laporan/inbox', [LaporanController::class, 'leader'])->name('laporan.inbox');
 
 Route::resource('laporan',LaporanController::class);
 Auth::routes();
+
+
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
