@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateLaporanRequest;
 use Illuminate\Contracts\Support\ValidatedData;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Carbon;
 
 class LaporanController extends Controller
 {
@@ -32,6 +33,15 @@ class LaporanController extends Controller
      */
     public function create()
     {
+        $user = auth()->user();
+
+        $laporan = Laporan::where('user_id', $user->id)
+        ->whereDate('created_at', Carbon::today())
+        ->first();
+        
+        if ($laporan) {
+            return redirect()->route('laporan.index')->with('error', 'Anda sudah membuat laporan hari ini.');
+        }
         return view('laporan.create');
     }
 
