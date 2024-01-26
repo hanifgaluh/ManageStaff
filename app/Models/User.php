@@ -49,4 +49,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Laporan::class);
     }
+
+    public function staff()
+    {
+        return $this->hasMany(User::class, 'leader', 'name');
+    }
 }

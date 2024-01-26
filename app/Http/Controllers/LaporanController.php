@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Laporan;
-use App\Http\Requests\StoreLaporanRequest;
-use App\Http\Requests\UpdateLaporanRequest;
+use App\Http\Requests\LaporanRequest;
 use Illuminate\Contracts\Support\ValidatedData;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Carbon;
+
 
 class LaporanController extends Controller
 {
@@ -18,8 +18,7 @@ class LaporanController extends Controller
     public function index()
     {
         $user = auth()->user();
-        $laporans = Laporan::with('user')->where('user_id', $user->id)->get();
-
+        $laporans = Laporan::with('user')->where('user_id', $user->id)->orderBy('created_at', 'desc')->get();
         if ($laporans !== null) {
             return view('laporan.index', ['laporans' => $laporans]);
         } else {
@@ -48,7 +47,7 @@ class LaporanController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreLaporanRequest $request)
+    public function store(LaporanRequest $request)
     {
 
         $user = auth()->user();
@@ -85,7 +84,7 @@ class LaporanController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateLaporanRequest $request, Laporan $laporan)
+    public function update(LaporanRequest $request, Laporan $laporan)
     {
 
         $validatedData = $request->validated();

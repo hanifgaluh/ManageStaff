@@ -4,6 +4,12 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8">
+            @if(session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+            @endif
+
             <h1>Laporan</h1>
             <ul class="list-group">
                 @forelse ($laporans as $laporan)
