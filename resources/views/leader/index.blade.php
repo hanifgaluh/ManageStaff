@@ -10,5 +10,10 @@
                 <li>Tidak ada bawahan.</li>
             @endforelse
         </ul>
+
+        <div class="col-md-4 text-right">
+            <a class="btn btn-primary mt-3" href="{{ route('leader.create') }}" role="button">Add Staff</a>
+        </div>
+        
     </div>
 @endsection

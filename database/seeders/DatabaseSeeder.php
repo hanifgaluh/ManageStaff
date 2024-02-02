@@ -38,15 +38,45 @@ class DatabaseSeeder extends Seeder
         ]);
 
         User::factory()->create([
+            'name' => 'staffd',
+            'email' => 'staffd@gmail.com',
+            'password' => bcrypt('password'),
+            
+        ]);
+
+        User::factory()->create([
+            'name' => 'staffe',
+            'email' => 'staffe@gmail.com',
+            'password' => bcrypt('password'),
+            
+        ]);
+
+        User::factory()->create([
+            'name' => 'staffg',
+            'email' => 'staffg@gmail.com',
+            'password' => bcrypt('password'),
+            
+        ]);
+
+        User::factory()->create([
+            'name' => 'staffh',
+            'email' => 'staffh@gmail.com',
+            'password' => bcrypt('password'),
+            
+        ]);
+
+        User::factory()->create([
             'name' => 'leada',
             'email' => 'leada@gmail.com',
-            'password' => bcrypt('password')
+            'password' => bcrypt('password'),
+            'leader' => 'leadera'
         ]);
 
         User::factory()->create([
             'name' => 'leadb',
             'email' => 'leadb@gmail.com',
-            'password' => bcrypt('password')
+            'password' => bcrypt('password'),
+            'leader' => 'leaderb'
         ]);
     }
 }

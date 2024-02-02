@@ -16,6 +16,7 @@ class LeaderController extends Controller
     {
         $user = Auth::user();
         $staffs = User::where('leader', 'LIKE', '%' . $user->name . '%')->get();
+        
 
         return view('leader.index', ['staffs' => $staffs]);
     }
@@ -25,7 +26,9 @@ class LeaderController extends Controller
      */
     public function create()
     {
-        //
+        $newstaff = User::whereNull('leader')->get();
+
+        return view('leader.create', ['newstaff' => $newstaff]);
 
     }
 
@@ -34,7 +37,13 @@ class LeaderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+        ]);
+    
+        User::where('name', $request->name)->update(['leader' => Auth::user()->name]);
+    
+        return redirect()->route('leader.index')->with('success', 'Staff added successfully');
     }
 
     /**
@@ -51,6 +60,7 @@ class LeaderController extends Controller
     public function edit(Leader $leader)
     {
         //
+
     }
 
     /**
